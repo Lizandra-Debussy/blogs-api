@@ -11,13 +11,22 @@ const createUser = async (req, res) => {
   return res.status(201).json({ token: message });
 };
 
-const listUsers = async (req, res) => {
+const listUsers = async (_req, res) => {
   const users = await userService.listUsers();
 
   return res.status(200).json(users);
 };
 
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await userService.getById(id);
+  // console.log(user);
+  if (type) return res.status(404).json({ message });
+  res.status(200).json(message);
+};
+
 module.exports = {
   createUser,
   listUsers,
+  getUserById,
 };
