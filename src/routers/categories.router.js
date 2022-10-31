@@ -11,4 +11,8 @@ tokenValidate,
 nameValidateCategory,
 categoriesController.createCategory);
 
+routerCategories.get('/',
+tokenValidate,
+categoriesController.listCategories);
+
 module.exports = routerCategories;
