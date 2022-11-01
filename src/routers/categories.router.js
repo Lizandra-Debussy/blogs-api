@@ -1,8 +1,8 @@
 const express = require('express');
 const categoriesController = require('../controllers/categories.controller');
-const nameValidateCategory = require('../middlewares/nameValidateCategory');
 
 const tokenValidate = require('../middlewares/tokenValidate');
+const nameValidateCategory = require('../middlewares/nameValidateCategory');
 
 const routerCategories = express.Router();
 
