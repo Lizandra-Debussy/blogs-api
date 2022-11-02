@@ -3,17 +3,22 @@ const express = require('express');
 const blogPostController = require('../controllers/blogPost.controller');
 
 const tokenValidate = require('../middlewares/tokenValidate');
-const fieldsValidate = require('../middlewares/blogPostValidate');
+// const blogPostMiddlewares = require('../middlewares/blogPostValidate');
 
 const routerBlogPost = express.Router();
 
-routerBlogPost.post('/',
-tokenValidate,
-fieldsValidate,
-blogPostController.createBlogPost);
+// routerBlogPost.post('/',
+// tokenValidate,
+// blogPostMiddlewares.categoryIdValidate,
+// blogPostMiddlewares.fieldsValidate,
+// blogPostController.createBlogPost);
 
 routerBlogPost.get('/',
 tokenValidate,
 blogPostController.listBlogPosts);
+
+routerBlogPost.get('/:id',
+tokenValidate,
+blogPostController.getBlogPostById);
 
 module.exports = routerBlogPost;
