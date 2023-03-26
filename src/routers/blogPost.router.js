@@ -26,4 +26,8 @@ tokenValidate,
 blogPostMiddlewares.fieldsValidate,
 blogPostController.updateBlogPost);
 
+routerBlogPost.delete('/:id',
+tokenValidate,
+blogPostController.deleteBlogPost);
+
 module.exports = routerBlogPost;
