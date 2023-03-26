@@ -1,17 +1,15 @@
 const express = require('express');
 const userController = require('../controllers/user.controller');
 
-const emailValidate = require('../middlewares/emailValidate');
-const nameValidate = require('../middlewares/nameValidate');
-const passwordValidate = require('../middlewares/passwordValidate');
+const inputValidate = require('../middlewares/inputsValidate');
 const tokenValidate = require('../middlewares/tokenValidate');
 
 const routerUser = express.Router();
 
 routerUser.post('/', 
-nameValidate,
-emailValidate,
-passwordValidate,
+inputValidate.nameValidate,
+inputValidate.emailValidate,
+inputValidate.passwordValidate,
 userController.createUser);
 
 routerUser.get('/',

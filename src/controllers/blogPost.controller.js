@@ -1,11 +1,22 @@
 const blogPostService = require('../services/blogPost.service');
+const userService = require('../services/user.service');
 
-// const createBlogPost = async (req, res) => {
-//   const { title, content } = req.body;
-//   const blogPost = await blogPostService.createBlogPost(title, content);
-//   // console.log();
-//   return res.status(201).json(blogPost);
-// };
+const createBlogPost = async (req, res) => {
+  const { email } = req.user;
+  const { title, content, categoryIds } = req.body;
+
+  const getId = await userService.findByEmail(email);
+  const userId = getId.dataValues.id;
+
+  const { type, message } = await blogPostService.createBlogPost(
+    title, content, userId, categoryIds,
+  );
+ 
+  if (type) {
+    return res.status(400).json({ message });
+  }
+  return res.status(201).json(message);
+};
 
 const listBlogPosts = async (req, res) => {
   const content = req.body;
@@ -22,7 +33,7 @@ const getBlogPostById = async (req, res) => {
 };
 
 module.exports = {
-  // createBlogPost,
+  createBlogPost,
   listBlogPosts,
   getBlogPostById,
 };
