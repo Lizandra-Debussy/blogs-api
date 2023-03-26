@@ -23,9 +23,15 @@ const getById = async (id) => {
   return { type: 'USER_DOES_NOT_EXIST', message: 'User does not exist' };
 };
 
+const deleteUser = async (id) => {
+  const result = await User.destroy({ where: { id } });
+  return result > 0;
+};
+
 module.exports = {
   createUser,
   findByEmail,
   listUsers,
   getById,
+  deleteUser,
 };

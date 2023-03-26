@@ -20,13 +20,24 @@ const listUsers = async (_req, res) => {
 const getUserById = async (req, res) => {
   const { id } = req.params;
   const { type, message } = await userService.getById(id);
-  // console.log(user);
+
   if (type) return res.status(404).json({ message });
   res.status(200).json(message);
+};
+
+const deleteUser = async (req, res) => {
+  const { email } = req.user;
+
+  const getId = await userService.findByEmail(email);
+  const userId = getId.dataValues.id;
+
+  const deleteUserId = await userService.deleteUser(userId);
+  if (deleteUserId) return res.status(204).json();
 };
 
 module.exports = {
   createUser,
   listUsers,
   getUserById,
+  deleteUser,
 };
